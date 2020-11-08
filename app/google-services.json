@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "508533740636",
+    "firebase_url": "https://authenticationproject-583cc.firebaseio.com",
+    "project_id": "authenticationproject-583cc",
+    "storage_bucket": "authenticationproject-583cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:508533740636:android:4c6c505443054ca7c08299",
+        "android_client_info": {
+          "package_name": "com.lebogang.akira"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "508533740636-frrece8h2tomp16t8k45roverfi7a6am.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lebogang.akira",
+            "certificate_hash": "386f611cab1e3e0bcf007bb1bb9ebabbd4f67809"
+          }
+        },
+        {
+          "client_id": "508533740636-nfk4peoi2fcgrr9vern163b024cj8u9d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDv5i1OE2YxYJ_egK4e-Wy5pDk2WzxTiLA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "508533740636-nfk4peoi2fcgrr9vern163b024cj8u9d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
