@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar2"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@null"
@@ -30,7 +30,7 @@
             android:text="Phone number" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/phoneTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -48,6 +48,7 @@
             android:text="Enter Verification Code" />
 
         <TextView
+            android:id="@+id/counterTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -65,6 +66,7 @@
             app:boxBackgroundMode="filled">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/codeEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -73,6 +75,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/verifyButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -82,7 +85,18 @@
             android:text="Verify"
             app:cornerRadius="8dp" />
 
+        <TextView
+            android:id="@+id/errorMsgTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            android:textColor="@color/red"
+            android:text="" />
+
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/resendButton"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

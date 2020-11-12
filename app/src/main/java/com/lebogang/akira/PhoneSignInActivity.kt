@@ -1,11 +1,8 @@
 package com.lebogang.akira
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.widget.doOnTextChanged
+import com.lebogang.akira.databinding.ActivityPhoneSignInBinding
 
-class PhoneSignInActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_phone_sign_in)
-    }
-}
