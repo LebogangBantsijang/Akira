@@ -10,8 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Akira">
         <activity android:name=".EmailSignInActivity"></activity>
-        <activity android:name=".PhoneAuthenticateActivity" />
-        <activity android:name=".PhoneSignInActivity" />
+        <activity android:name=".PhonePackage.PhoneAuthenticateActivity" />
+        <activity android:name=".PhonePackage.PhoneSignInActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
