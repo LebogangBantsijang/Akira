@@ -1,5 +1,6 @@
 package com.lebogang.akira.PhonePackage
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.appcompat.app.AppCompatActivity
@@ -113,6 +114,10 @@ class PhoneAuthenticateActivity : AppCompatActivity(), PhoneCustomInterface{
         auth.signInWithCredential(credential).addOnCompleteListener(this) {
             if (it.isSuccessful){
                 //next activity
+                val user = auth.currentUser
+                val intent = Intent().apply {
+                    putExtra("User", user)
+                }
             }else
                 binding.errorMsgTextView.text = "Failed to Sign In"
         }
