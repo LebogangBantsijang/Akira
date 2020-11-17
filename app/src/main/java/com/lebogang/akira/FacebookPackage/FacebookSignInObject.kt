@@ -10,10 +10,9 @@
  * under the License.
  */
 
-package com.lebogang.akira.PhonePackage
+package com.lebogang.akira.FacebookPackage
 
-interface PhoneCustomInterface {
 
-    fun onPhoneCallback(result:VerificationCallbacks.Feedback)
+class FacebookSignInObject {
 
 }
