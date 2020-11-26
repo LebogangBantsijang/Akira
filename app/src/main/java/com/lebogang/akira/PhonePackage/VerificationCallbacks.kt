@@ -19,7 +19,7 @@ import com.google.firebase.auth.PhoneAuthProvider
 class VerificationCallbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
 
     lateinit var phoneCustomInterface:PhoneCustomInterface
-    private lateinit var credential: PhoneAuthCredential
+    lateinit var credential: PhoneAuthCredential
     private lateinit var verificationId:String
     private lateinit var forceResendingToken: PhoneAuthProvider.ForceResendingToken
 
@@ -45,10 +45,7 @@ class VerificationCallbacks: PhoneAuthProvider.OnVerificationStateChangedCallbac
     }
 
     fun getCredential(code: String):PhoneAuthCredential{
-        if (credential != null)
-            return credential
-        else
-            return PhoneAuthProvider.getCredential(verificationId!!, code)
+        return PhoneAuthProvider.getCredential(verificationId, code)
     }
 
     enum class Feedback{

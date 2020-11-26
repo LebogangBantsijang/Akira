@@ -22,13 +22,13 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.lebogang.akira.UserActivity
 
 class GoogleSignInObject(private val activity: AppCompatActivity) {
 
     private val requestCode:Int = 987
 
-    private val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-        .requestIdToken("")
+    private val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN) 
         .requestEmail()
         .build()
 
@@ -41,16 +41,19 @@ class GoogleSignInObject(private val activity: AppCompatActivity) {
         activity.startActivityForResult(intent, requestCode)
     }
 
-    fun onActivityResult(requestCode: Int, data: Intent?){
-        if (this.requestCode == requestCode){
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            try {
-                val account = task.getResult(ApiException::class.java)
-                //Sign In successful, authenticate with firebase
-                firebaseAuthenticate(account!!.idToken!!)
-            }catch (e : ApiException){
-                //Sign in failed
+    fun onActivityResult(data: Intent?){
+        val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+        try {
+            val account = task.getResult(ApiException::class.java)!!
+            //Sign In successful, authenticate with firebase
+            if (account != null){
+                val tokenId:String = account.idToken!!
+                firebaseAuthenticate(tokenId)
             }
+        }catch (e : ApiException){
+            //Sign in failed
+            Snackbar.make(activity.window.peekDecorView()
+                    ,"Authentication Error.", Snackbar.LENGTH_SHORT).show()
         }
     }
 
@@ -60,9 +63,10 @@ class GoogleSignInObject(private val activity: AppCompatActivity) {
             if (it.isSuccessful){
                 //move to the next activity
                 val user = auth.currentUser
-                val intent = Intent().apply {
+                val intent = Intent(activity, UserActivity :: class.java).apply {
                     putExtra("User", user)
                 }
+                activity.startActivity(intent)
             }else{
                 Snackbar.make(activity.window.peekDecorView()
                     ,"Authentication Failed.", Snackbar.LENGTH_SHORT).show()

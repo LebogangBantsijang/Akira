@@ -31,8 +31,9 @@
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:title="Verify Phone"
+            app:titleTextColor="?colorPrimary"
             app:titleTextAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:navigationIcon="@drawable/ic_back" />
+            app:navigationIcon="@drawable/ic_back"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -73,7 +74,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
-            android:hint="4 digit code"
+            android:hint="6 digit code"
             app:boxBackgroundColor="@null"
             app:boxBackgroundMode="filled">
 

@@ -7,7 +7,7 @@
         <item name="colorOnPrimary">@color/white</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:navigationBarColor">?colorPrimary</item>
-        <item name="android:navigationBarDividerColor" tools:ignore="NewApi">?colorControlNormal</item>
+        <item name="android:navigationBarDividerColor" tools:ignore="NewApi">#00000000</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/purple_700</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
