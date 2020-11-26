@@ -30,6 +30,7 @@
             app:collapseIcon="@drawable/ic_back"
             app:navigationIcon="@drawable/ic_back"
             app:title="Phone Sign In"
+            app:titleTextColor="?colorPrimary"
             app:titleTextAppearance="@style/TextAppearance.AppCompat.Medium"
             />
 
@@ -55,7 +56,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             app:ccp_showFullName="true"
-            app:ccp_showPhoneCode="false"
+            app:ccp_autoDetectCountry="true"
+            app:ccp_showPhoneCode="true"
             app:ccp_showNameCode="false"/>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -65,9 +67,14 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:hint="Phone Number"
-            app:boxBackgroundColor="@null"
-            app:boxBackgroundMode="filled"
+            app:boxBackgroundMode="outline"
             app:hintAnimationEnabled="true"
+            app:boxCornerRadiusBottomEnd="4dp"
+            app:boxCornerRadiusBottomStart="4dp"
+            app:boxCornerRadiusTopEnd="4dp"
+            app:boxCornerRadiusTopStart="4dp"
+            app:counterEnabled="true"
+            app:boxBackgroundColor="@null"
             app:hintEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -82,7 +89,7 @@
             android:id="@+id/errorMsgTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="16dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:textColor="@color/red"

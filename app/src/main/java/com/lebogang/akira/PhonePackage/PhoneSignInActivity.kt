@@ -36,6 +36,7 @@ class PhoneSignInActivity : AppCompatActivity() {
     }
 
     private fun setupEditText(){
+        //country code picker
         binding.ccp.registerCarrierNumberEditText(binding.phoneNumberEditText)
         binding.phoneNumberEditText.doOnTextChanged { text, start, before, count ->
             if (binding.errorMsgTextView.text.toString().equals("invalid number"))
@@ -45,6 +46,7 @@ class PhoneSignInActivity : AppCompatActivity() {
 
     private fun setupNextButton(){
         binding.nextButton.setOnClickListener {
+            //get user information
             if (binding.ccp.isValidFullNumber)
                 startActivity(Intent(this, PhoneAuthenticateActivity::class.java).apply {
                     putExtra("FormattedNumber", binding.ccp.formattedFullNumber)

@@ -15,8 +15,12 @@ package com.lebogang.akira
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.facebook.AccessToken
+import com.facebook.CallbackManager
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.lebogang.akira.EmailPackage.EmailSignInActivity
+import com.lebogang.akira.FacebookPackage.FacebookSignInObject
 import com.lebogang.akira.GooglePackage.GoogleSignInObject
 import com.lebogang.akira.PhonePackage.PhoneSignInActivity
 import com.lebogang.akira.databinding.ActivityMainBinding
@@ -24,17 +28,20 @@ import com.lebogang.akira.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityMainBinding
-    private lateinit var googleSignInObject: GoogleSignInObject
-
+    private var googleSignInObject: GoogleSignInObject? = null
+    private lateinit var facebookSignInObject: FacebookSignInObject
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setupButtons()
+        checkIfUserIsSignedIn()
         googleSignInObject = GoogleSignInObject(this)
+        facebookSignInObject = FacebookSignInObject(this)
+        setupButtons()
     }
 
+    //initialise sign in buttons
     private fun setupButtons(){
         binding.phoneButton.setOnClickListener {
             startActivity(Intent(this, PhoneSignInActivity::class.java))
@@ -43,12 +50,25 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, EmailSignInActivity::class.java))
         }
         binding.googleButton.setOnClickListener {
-            googleSignInObject.signIn()
+            googleSignInObject!!.signIn()
         }
+        binding.facebookButton.setPermissions("email")
+        binding.facebookButton.registerCallback(facebookSignInObject.callbackManager, facebookSignInObject.getFacebookCallback())
+    }
+
+    private fun checkIfUserIsSignedIn(){
+        val auth = Firebase.auth
+        val user = auth.currentUser
+        if (user != null) startActivity(Intent(this, UserActivity :: class.java).apply {
+            putExtra("User", user)
+        })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        googleSignInObject.onActivityResult(requestCode,data)
+        if (requestCode == 987)
+            googleSignInObject!!.onActivityResult(data)
+        else
+            facebookSignInObject.onActivityResult(requestCode,resultCode,data)
     }
 }

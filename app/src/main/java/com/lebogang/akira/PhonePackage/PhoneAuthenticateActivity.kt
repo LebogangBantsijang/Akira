@@ -16,11 +16,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.lebogang.akira.UserActivity
 import com.lebogang.akira.databinding.ActivityPhoneAuthenticateBinding
 import java.util.concurrent.TimeUnit
 
@@ -30,6 +32,8 @@ class PhoneAuthenticateActivity : AppCompatActivity(), PhoneCustomInterface{
     private val auth = Firebase.auth
 
     private val counter = object :CountDownTimer(59000, 1000){
+
+
         override fun onTick(millisUntilFinished: Long) {
             //display counter
             binding.counterTextView.text = "00:" + TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished)
@@ -65,7 +69,7 @@ class PhoneAuthenticateActivity : AppCompatActivity(), PhoneCustomInterface{
                 binding.errorMsgTextView.text = "Invalid Code"
             else{
                 val code = binding.codeEditText.text.toString()
-                val credential = verificationCallbacks.getCredential(code)
+                val credential : PhoneAuthCredential = verificationCallbacks.getCredential(code)
                 signIn(credential)
             }
         }
@@ -86,6 +90,7 @@ class PhoneAuthenticateActivity : AppCompatActivity(), PhoneCustomInterface{
             .setTimeout(60L, TimeUnit.SECONDS)
             .setCallbacks(verificationCallbacks)
             .build()
+        binding.errorMsgTextView.text = "Loading reCaptcha..."
         PhoneAuthProvider.verifyPhoneNumber(option)
     }
 
@@ -101,8 +106,7 @@ class PhoneAuthenticateActivity : AppCompatActivity(), PhoneCustomInterface{
             VerificationCallbacks.Feedback.VERIFICATION_COMPLETED->{
                 // cancel counter and sign in
                 counter.cancel()
-                val credential = verificationCallbacks.getCredential("")
-                signIn(credential)
+                signIn(verificationCallbacks.credential)
             }
 
             VerificationCallbacks.Feedback.VERIFICATION_FAILED->{
@@ -127,11 +131,13 @@ class PhoneAuthenticateActivity : AppCompatActivity(), PhoneCustomInterface{
             if (it.isSuccessful){
                 //next activity
                 val user = auth.currentUser
-                val intent = Intent().apply {
+                val intent = Intent(this, UserActivity :: class.java).apply {
                     putExtra("User", user)
                 }
+                startActivity(intent)
             }else
-                binding.errorMsgTextView.text = "Failed to Sign In"
+                Snackbar.make(this.window.peekDecorView()
+                        ,"Authentication Failed.", Snackbar.LENGTH_SHORT).show()
         }
     }
 

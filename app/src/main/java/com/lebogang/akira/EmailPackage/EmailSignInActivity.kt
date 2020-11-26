@@ -15,11 +15,13 @@ package com.lebogang.akira.EmailPackage
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.actionCodeSettings
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.lebogang.akira.R
+import com.lebogang.akira.UserActivity
 import com.lebogang.akira.databinding.ActivityEmailSignInBinding
 
 class EmailSignInActivity : AppCompatActivity() {
@@ -31,46 +33,60 @@ class EmailSignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityEmailSignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setupToolbar()
         setupView()
+    }
+
+    private fun setupToolbar(){
+        setSupportActionBar(binding.toolbar)
+        binding.toolbar.setNavigationOnClickListener { onBackPressed() }
     }
 
     private fun setupView(){
         binding.nextButton.setOnClickListener {
+            //reset error message if present
             binding.errorMsgTextView.text = ""
+            //get information
             val email = binding.emailEditText.text!!.toString()
             val password = binding.passwordEditText.text!!.toString()
+            //check if null
             if (email == null || password == null)
                 binding.errorMsgTextView.text = "invalid values"
             else{
-                if (signInUser(email, password) || createUser(email, password)){
-                    val user = auth.currentUser
-                    val intent = Intent().apply {
-                        putExtra("User", user)
-                    }
-                }else{
-                    binding.errorMsgTextView.text = "all has Failed"
-                }
+                //sign in user
+                signInUser(email, password)
             }
         }
     }
 
-    private fun createUser(email:String, password:String) : Boolean{
-        var result = false
+    private fun createUser(email:String, password:String) {
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this){
             if (it.isSuccessful){
-                result = true
+                //Start new activity
+                val user:FirebaseUser = auth.currentUser!!
+                val intent = Intent(this, UserActivity :: class.java).apply {
+                    putExtra("User", user)
+                }
+                startActivity(intent)
+            }else{
+                Snackbar.make(this.window.peekDecorView()
+                        ,"Authentication Failed.", Snackbar.LENGTH_SHORT).show()
             }
         }
-        return result
     }
 
-    private fun signInUser(email:String, password:String) : Boolean{
-        var result = false
+    private fun signInUser(email:String, password:String){
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this){
             if (it.isSuccessful){
-                result = true
+                //Start new activity
+                val user:FirebaseUser = auth.currentUser!!
+                val intent = Intent(this, UserActivity :: class.java).apply {
+                    putExtra("User", user)
+                }
+                startActivity(intent)
+            }else{
+                createUser(email, password)
             }
         }
-        return result
     }
 }
