@@ -17,6 +17,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.facebook.AccessToken
 import com.facebook.CallbackManager
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.common.api.ApiException
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.lebogang.akira.EmailPackage.EmailSignInActivity
@@ -28,7 +31,7 @@ import com.lebogang.akira.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityMainBinding
-    private var googleSignInObject: GoogleSignInObject? = null
+    private lateinit var googleSignInObject: GoogleSignInObject
     private lateinit var facebookSignInObject: FacebookSignInObject
     
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, EmailSignInActivity::class.java))
         }
         binding.googleButton.setOnClickListener {
-            googleSignInObject!!.signIn()
+            googleSignInObject.signIn()
         }
         binding.facebookButton.setPermissions("email")
         binding.facebookButton.registerCallback(facebookSignInObject.callbackManager, facebookSignInObject.getFacebookCallback())
@@ -66,9 +69,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 987)
-            googleSignInObject!!.onActivityResult(data)
-        else
-            facebookSignInObject.onActivityResult(requestCode,resultCode,data)
+        //googleSignInObject!!.onActivityResult(data)
+        if (requestCode == googleSignInObject.requestCode){
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                //Sign In successful, authenticate with firebase
+                val account = task.getResult(ApiException::class.java)
+                val tokenId:String = account!!.idToken!!
+                googleSignInObject.firebaseAuthenticate(tokenId)
+            }catch (e : ApiException){
+                //Sign in failed
+                Snackbar.make(window.peekDecorView()
+                    ,"Authentication Error.", Snackbar.LENGTH_SHORT).show()
+            }
+        } else facebookSignInObject.onActivityResult(requestCode,resultCode,data)
     }
 }

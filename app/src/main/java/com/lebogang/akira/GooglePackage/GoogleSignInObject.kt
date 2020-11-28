@@ -26,7 +26,7 @@ import com.lebogang.akira.UserActivity
 
 class GoogleSignInObject(private val activity: AppCompatActivity) {
 
-    private val requestCode:Int = 987
+    val requestCode:Int = 987
 
     private val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN) 
         .requestEmail()
@@ -44,10 +44,10 @@ class GoogleSignInObject(private val activity: AppCompatActivity) {
     fun onActivityResult(data: Intent?){
         val task = GoogleSignIn.getSignedInAccountFromIntent(data)
         try {
-            val account = task.getResult(ApiException::class.java)!!
             //Sign In successful, authenticate with firebase
-            if (account != null){
-                val tokenId:String = account.idToken!!
+            if (task != null){
+                val account = task.getResult(ApiException::class.java)
+                val tokenId:String = account!!.idToken!!
                 firebaseAuthenticate(tokenId)
             }
         }catch (e : ApiException){
@@ -57,7 +57,7 @@ class GoogleSignInObject(private val activity: AppCompatActivity) {
         }
     }
 
-    private fun firebaseAuthenticate(tokenId:String){
+    fun firebaseAuthenticate(tokenId:String){
         val credential = GoogleAuthProvider.getCredential(tokenId, null)
         auth.signInWithCredential(credential).addOnCompleteListener(activity){
             if (it.isSuccessful){
