@@ -47,14 +47,15 @@ class EmailSignInActivity : AppCompatActivity() {
             //reset error message if present
             binding.errorMsgTextView.text = ""
             //get information
-            val email = binding.emailEditText.text!!.toString()
-            val password = binding.passwordEditText.text!!.toString()
+            val email = binding.emailEditText.text
+            val password = binding.passwordEditText.text
             //check if null
             if (email == null || password == null)
-                binding.errorMsgTextView.text = "invalid values"
+                binding.errorMsgTextView.text = "Invalid values"
             else{
                 //sign in user
-                signInUser(email, password)
+                if (password.length > 7) signInUser(email.toString(), password.toString())
+                else binding.errorMsgTextView.text = "Invalid Password"
             }
         }
     }

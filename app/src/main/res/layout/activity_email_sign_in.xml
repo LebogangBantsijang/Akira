@@ -96,6 +96,14 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            android:textColor="?android:textColorSecondaryNoDisable"
+            android:text="Password must be atleast 8 characters" />
+
+        <TextView
             android:id="@+id/errorMsgTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
