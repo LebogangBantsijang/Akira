@@ -55,7 +55,7 @@ class EmailSignInActivity : AppCompatActivity() {
                 if (password.length > 7)
                     signInUser(email.toString(), password.toString())
                 else
-                    Snackbar.make(this.window.peekDecorView(), "Invalid password",Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(this.window.peekDecorView(), "Invalid values",Snackbar.LENGTH_LONG).show()
             }
         }
     }
