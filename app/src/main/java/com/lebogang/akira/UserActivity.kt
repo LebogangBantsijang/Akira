@@ -12,6 +12,7 @@
 
 package com.lebogang.akira
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
@@ -32,15 +33,11 @@ class UserActivity : AppCompatActivity() {
         if (user != null ) setUserDetails(user)
     }
 
-
     private fun setUserDetails(user:FirebaseUser){
-        val name = if (user.displayName != null) user.displayName else "Unknown"
+        val name = if (user.displayName != null) user.displayName else "Unknown Name"
+        val email = if (user.email != null) "Email:" + user.email else "Email:"
         binding.nameTextView.text = name
-    }
-
-    override fun onDestroy(){
-        Firebase.auth.signOut()
-        super.onDestroy()
+        binding.emailTextView.text = email
     }
 
     //avoid going back to sign in

@@ -13,6 +13,7 @@
 package com.lebogang.akira.GooglePackage
 
 import android.content.Intent
+import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -22,15 +23,17 @@ import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.lebogang.akira.R
 import com.lebogang.akira.UserActivity
 
 class GoogleSignInObject(private val activity: AppCompatActivity) {
 
     val requestCode:Int = 987
 
-    private val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN) 
-        .requestEmail()
-        .build()
+    private val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(activity.resources.getString(R.string.webclientId))
+            .requestEmail()
+            .build()
 
     private val googleSignInClient = GoogleSignIn.getClient(activity, gso)
 
@@ -39,6 +42,7 @@ class GoogleSignInObject(private val activity: AppCompatActivity) {
     fun signIn(){
         val intent = googleSignInClient.signInIntent
         activity.startActivityForResult(intent, requestCode)
+
     }
 
     fun onActivityResult(data: Intent?){
