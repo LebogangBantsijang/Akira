@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2020. - Lebogang Bantsijang
+  ~ Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file
+  ~ compliance License. You may obtain a copy of the License at
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software distributed under the
+  ~ License on an "IS BASIS", WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+  ~ express or implied. See the for specific language governing permissions and limitations
+  ~ under the License.
+  -->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PhonePackage.PhoneSignInActivity">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:foreground="@drawable/gradient"
+        android:scaleType="centerCrop"
+        android:alpha="0.4"
+        app:srcCompat="@drawable/background_3" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:navigationIcon="@drawable/ic_round_arrow_back_24"
+        />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_marginTop="?actionBarSize">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animation_view"
+                android:layout_width="176dp"
+                android:layout_height="176dp"
+                android:layout_margin="16dp"
+                app:lottie_rawRes="@raw/phone_number_verification"
+                app:lottie_loop="true"
+                app:lottie_autoPlay="true" />
+
+            <View
+                android:layout_width="64dp"
+                android:layout_height="1dp"
+                android:layout_marginBottom="16dp"
+                android:background="?android:attr/listDivider" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="48dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp">
+
+                <com.hbb20.CountryCodePicker
+                    android:id="@+id/ccp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:ccp_arrowColor="@color/white"
+                    app:ccp_flagBorderColor="@color/white"
+                    app:ccp_contentColor="@color/white"
+                    app:ccpDialog_textColor="@color/white"
+                    app:ccp_showFullName="false"
+                    app:ccp_autoDetectCountry="true"
+                    app:ccp_showPhoneCode="true"
+                    app:ccp_showNameCode="false"/>
+
+                <EditText
+                    android:id="@+id/phoneNumberEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:background="@null"
+                    android:hint="Phone number"
+                    android:singleLine="true" />
+
+                <ImageButton
+                    android:id="@+id/sendButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_round_send_24" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Timer" />
+
+            <TextView
+                android:id="@+id/counterTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:text="00:00" />
+
+            <EditText
+                android:id="@+id/codeEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginBottom="24dp"
+                android:ems="8"
+                android:background="@null"
+                android:inputType="number"
+                android:hint="Enter Code"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/verifyButton"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="8dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:textColor="@color/white"
+                android:text="Verify"
+                app:icon="@drawable/ic_round_check_24"
+                app:iconTint="@color/white"
+                app:cornerRadius="8dp" />
+
+            <TextView
+                android:id="@+id/errorMsgTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+                android:textColor="@color/red"
+                android:text="" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <SeekBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/semiTranslucent"
+        android:indeterminate="true"
+        android:thumb="@null"
+        android:visibility="gone" />
+
+</FrameLayout>

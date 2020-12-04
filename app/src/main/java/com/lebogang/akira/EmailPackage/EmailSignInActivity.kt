@@ -22,16 +22,16 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.lebogang.akira.R
 import com.lebogang.akira.UserActivity
-import com.lebogang.akira.databinding.ActivityEmailSignInBinding
+import com.lebogang.akira.databinding.ActivityEmailSign2Binding
 
 class EmailSignInActivity : AppCompatActivity() {
 
-    private lateinit var binding:ActivityEmailSignInBinding
+    private lateinit var binding:ActivityEmailSign2Binding
     private val auth = Firebase.auth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityEmailSignInBinding.inflate(layoutInflater)
+        binding = ActivityEmailSign2Binding.inflate(layoutInflater)
         setContentView(binding.root)
         setupToolbar()
         setupView()
@@ -43,19 +43,19 @@ class EmailSignInActivity : AppCompatActivity() {
     }
 
     private fun setupView(){
-        binding.nextButton.setOnClickListener {
-            //reset error message if present
-            binding.errorMsgTextView.text = ""
+        binding.verifyButton.setOnClickListener {
             //get information
             val email = binding.emailEditText.text
             val password = binding.passwordEditText.text
             //check if null
             if (email == null || password == null)
-                binding.errorMsgTextView.text = "Invalid values"
+                Snackbar.make(this.window.peekDecorView(), "Invalid values",Snackbar.LENGTH_LONG).show()
             else{
                 //sign in user
-                if (password.length > 7) signInUser(email.toString(), password.toString())
-                else binding.errorMsgTextView.text = "Invalid Password"
+                if (password.length > 7)
+                    signInUser(email.toString(), password.toString())
+                else
+                    Snackbar.make(this.window.peekDecorView(), "Invalid values",Snackbar.LENGTH_LONG).show()
             }
         }
     }

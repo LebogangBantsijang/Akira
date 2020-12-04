@@ -26,17 +26,17 @@ import com.lebogang.akira.EmailPackage.EmailSignInActivity
 import com.lebogang.akira.FacebookPackage.FacebookSignInObject
 import com.lebogang.akira.GooglePackage.GoogleSignInObject
 import com.lebogang.akira.PhonePackage.PhoneSignInActivity
-import com.lebogang.akira.databinding.ActivityMainBinding
+import com.lebogang.akira.databinding.ActivityMain2Binding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding:ActivityMainBinding
+    private lateinit var binding:ActivityMain2Binding
     private lateinit var googleSignInObject: GoogleSignInObject
     private lateinit var facebookSignInObject: FacebookSignInObject
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMain2Binding.inflate(layoutInflater)
         setContentView(binding.root)
         checkIfUserIsSignedIn()
         googleSignInObject = GoogleSignInObject(this)
@@ -71,17 +71,7 @@ class MainActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         //googleSignInObject!!.onActivityResult(data)
         if (requestCode == googleSignInObject.requestCode){
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            try {
-                //Sign In successful, authenticate with firebase
-                val account = task.getResult(ApiException::class.java)
-                val tokenId:String = account!!.idToken!!
-                googleSignInObject.firebaseAuthenticate(tokenId)
-            }catch (e : ApiException){
-                //Sign in failed
-                Snackbar.make(window.peekDecorView()
-                    ,"Authentication Error.", Snackbar.LENGTH_SHORT).show()
-            }
+            googleSignInObject.onActivityResult(data)
         } else facebookSignInObject.onActivityResult(requestCode,resultCode,data)
     }
 }

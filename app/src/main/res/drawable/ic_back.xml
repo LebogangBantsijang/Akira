@@ -2,7 +2,7 @@
     android:viewportHeight="480"
     android:viewportWidth="480"
     android:width="24dp"
-    android:tint="?colorPrimary"
+    android:tint="@color/white"
     xmlns:android="http://schemas.android.com/apk/res/android">
     <path android:fillColor="#034460" android:fillType="nonZero"
         android:pathData="M315.48,63.035C311.348,63.098 307.465,64.824 304.625,67.785L146.73,225.68C140.563,231.848 140.563,241.84 146.73,248.004L304.625,405.902C308.574,410.031 314.496,411.699 319.984,410.219C325.535,408.801 329.852,404.48 331.27,398.93C332.75,393.441 331.086,387.52 326.953,383.574L180.223,236.844L326.953,90.109C331.641,85.547 332.996,78.641 330.469,72.656C327.941,66.613 322.02,62.789 315.48,63.035Z" android:strokeColor="#00000000"/>

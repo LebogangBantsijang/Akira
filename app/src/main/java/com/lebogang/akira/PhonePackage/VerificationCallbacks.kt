@@ -20,9 +20,10 @@ class VerificationCallbacks: PhoneAuthProvider.OnVerificationStateChangedCallbac
 
     lateinit var phoneCustomInterface:PhoneCustomInterface
     lateinit var credential: PhoneAuthCredential
-    private lateinit var verificationId:String
+    private var verificationId:String? = null
     private lateinit var forceResendingToken: PhoneAuthProvider.ForceResendingToken
 
+    //callbacks
     override fun onCodeSent(p0: String, p1: PhoneAuthProvider.ForceResendingToken) {
         super.onCodeSent(p0, p1)
         verificationId = p0
@@ -44,8 +45,10 @@ class VerificationCallbacks: PhoneAuthProvider.OnVerificationStateChangedCallbac
         phoneCustomInterface.onPhoneCallback(Feedback.VERIFICATION_FAILED)
     }
 
-    fun getCredential(code: String):PhoneAuthCredential{
-        return PhoneAuthProvider.getCredential(verificationId, code)
+    fun getCredential(code: String?):PhoneAuthCredential?{
+        if (verificationId != null && code != null)
+            return PhoneAuthProvider.getCredential(verificationId!!, code)
+        return null
     }
 
     enum class Feedback{
