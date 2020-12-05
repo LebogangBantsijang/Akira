@@ -3,7 +3,7 @@
 # Akira
 Firebase authentication demo. 
 
-<img src="https://raw.githubusercontent.com/LebogangBantsijang/Akira/master/screenshot/Screenshot_20201204_162542_com.lebogang.akira.jpg"  height="640">
+<img src="https://raw.githubusercontent.com/LebogangBantsijang/Akira/master/screenshot/Screenshot_20201204_162542_com.lebogang.akira.jpg"  height="640">|<img src="https://raw.githubusercontent.com/LebogangBantsijang/Akira/master/screenshot/Screenshot_20201205_085132_com.lebogang.akira.jpg"  height="640">|<img src="https://raw.githubusercontent.com/LebogangBantsijang/Akira/master/screenshot/Screenshot_20201205_085151_com.lebogang.akira.jpg"  height="640">
 
 ### Features
 - Email and password based authentication
