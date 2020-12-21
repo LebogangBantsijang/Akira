@@ -20,7 +20,7 @@ This is a authentication demo application for android. It basically demonstrates
 
 ## Future Updates
 Authenticate using :
-- Twiiter
+- Twitter
 - Instagram
 
 ## Contributors
