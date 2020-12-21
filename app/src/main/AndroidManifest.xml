@@ -11,10 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Akira">
-        <activity android:name=".UserActivity"></activity>
-        <activity android:name=".EmailPackage.EmailSignInActivity" />
-        <activity android:name=".PhonePackage.PhoneAuthenticateActivity" />
-        <activity android:name=".PhonePackage.PhoneSignInActivity" />
+        <activity android:name=".PhonePackage.PhoneActivity" />
+        <activity android:name=".EmailPackage.EmailSignUpActivity" />
+        <activity android:name=".EmailPackage.EmailLoginActivity" />
+        <activity android:name=".UserActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

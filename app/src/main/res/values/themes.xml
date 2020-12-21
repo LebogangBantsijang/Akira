@@ -1,13 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Akira" parent="Theme.MaterialComponents.NoActionBar">
+    <style name="Theme.Akira" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/white</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:navigationBarColor">@color/navColor</item>
-        <item name="android:colorBackground">@color/navColor</item>
-        <item name="android:navigationBarDividerColor" tools:ignore="NewApi">@color/navColor</item>
-        <item name="android:statusBarColor" tools:targetApi="l">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
     </style>
 
     <style name="Theme.Dark.Akira" parent="Theme.MaterialComponents"/>
