@@ -61,16 +61,14 @@ class GoogleSignInObject(private val activity: AppCompatActivity) {
         }
     }
 
-    fun firebaseAuthenticate(tokenId:String){
+    private fun firebaseAuthenticate(tokenId:String){
         val credential = GoogleAuthProvider.getCredential(tokenId, null)
         auth.signInWithCredential(credential).addOnCompleteListener(activity){
             if (it.isSuccessful){
-                //move to the next activity
                 val user = auth.currentUser
-                val intent = Intent(activity, UserActivity :: class.java).apply {
+                activity.startActivity(Intent(activity, UserActivity::class.java).apply{
                     putExtra("User", user)
-                }
-                activity.startActivity(intent)
+                })
             }else{
                 Snackbar.make(activity.window.peekDecorView()
                     ,"Authentication Failed.", Snackbar.LENGTH_SHORT).show()

@@ -23,26 +23,37 @@ import com.lebogang.akira.databinding.ActivityUserBinding
 
 class UserActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityUserBinding
+    private val binding : ActivityUserBinding by lazy{
+        ActivityUserBinding.inflate(layoutInflater)
+    }
+    private val firebaseAuth:FirebaseAuth by lazy {
+        Firebase.auth
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initSignOutViews()
         val user = intent.extras!!.getParcelable<FirebaseUser>("User")
         if (user != null ) setUserDetails(user)
     }
 
     private fun setUserDetails(user:FirebaseUser){
-        val name = if (user.displayName != null) user.displayName else "Unknown Name"
-        val email = if (user.email != null) "Email:" + user.email else "Email:"
-        binding.nameTextView.text = name
+        val name = if (user.displayName != null) "Username: " + user.displayName else "Username:"
+        val email = if (user.email != null) "Email: " + user.email else "Email:"
+        val phone = if (user.phoneNumber != null) "Phone: " + user.phoneNumber else "Phone:"
+        binding.usernameTextView.text = name
         binding.emailTextView.text = email
+        binding.phoneTextView.text = phone
     }
 
-    //avoid going back to sign in
+    private fun initSignOutViews(){
+        binding.signOutButton.setOnClickListener {
+            firebaseAuth.signOut()
+        }
+    }
+
     override fun onBackPressed() {
-        //super.onBackPressed()
         moveTaskToBack(true)
     }
 }

@@ -33,11 +33,9 @@ class FacebookSignInObject(val activity: MainActivity) {
     fun getFacebookCallback():FacebookCallback<LoginResult>{
         return object : FacebookCallback<LoginResult>{
             override fun onSuccess(result: LoginResult?) {
-                //successfully logged into facebook
                 signIn(result!!.accessToken)
             }
             override fun onCancel() {
-
             }
             override fun onError(error: FacebookException?) {
             }
@@ -45,21 +43,17 @@ class FacebookSignInObject(val activity: MainActivity) {
     }
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?){
-        //let facebook handle this
         callbackManager.onActivityResult(requestCode,resultCode,data)
     }
 
     private fun signIn(token:AccessToken){
-        //sign in to firebase
         val credential = FacebookAuthProvider.getCredential(token.token)
         auth.signInWithCredential(credential).addOnCompleteListener(activity){
             if (it.isSuccessful){
-                //start activity
                 val user = auth.currentUser
-                val intent = Intent(activity, UserActivity :: class.java).apply {
+                activity.startActivity(Intent(activity, UserActivity :: class.java).apply {
                     putExtra("User", user)
-                }
-                activity.startActivity(intent)
+                })
             }else{
                 Snackbar.make(activity.window.peekDecorView()
                         ,"Authentication Failed.", Snackbar.LENGTH_SHORT).show()
