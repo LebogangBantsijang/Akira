@@ -5,21 +5,23 @@
 
 ![Logo](https://raw.githubusercontent.com/LebogangBantsijang/Akira/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png)
 
-## Firebase Authentication
-Firebase authentication demo. 
+## Intro
+This is a authentication demo application for android. It basically demonstrates how a user can be authenticated.
 
-<img src="https://raw.githubusercontent.com/LebogangBantsijang/Akira/master/screenshot/Screenshot_20201204_162542_com.lebogang.akira.jpg"  height="640">|<img src="https://raw.githubusercontent.com/LebogangBantsijang/Akira/master/screenshot/Screenshot_20201205_085132_com.lebogang.akira.jpg"  height="640">|<img src="https://raw.githubusercontent.com/LebogangBantsijang/Akira/master/screenshot/Screenshot_20201205_085151_com.lebogang.akira.jpg"  height="640">
+## Screenshots
+<img src="https://raw.githubusercontent.com/LebogangBantsijang/Akira/master/screenshot/Screenshot_20201221_163159_com.lebogang.akira.jpg"  height="480"> <img src="https://raw.githubusercontent.com/LebogangBantsijang/Akira/master/screenshot/Screenshot_20201221_163206_com.lebogang.akira.jpg"  height="480"> <img src="https://raw.githubusercontent.com/LebogangBantsijang/Akira/master/screenshot/Screenshot_20201221_163221_com.lebogang.akira.jpg"  height="480"> <img src="https://raw.githubusercontent.com/LebogangBantsijang/Akira/master/screenshot/Screenshot_20201221_163227_com.lebogang.akira.jpg"  height="480">
 
 ## Features
-- Email and password based authentication
-- Phone number authentication
-- Authenticate with Firebase using Google Accounts
-- Authenticate with Firebase using their Facebook accounts
+- Login using email and password
+- Create account using email and password
+- Sign in using Phone authentication
+- Sign in using a Google Account
+- Sign in using a Facebook Account
 
 ## Future Updates
-- Authenticate with Firebase using Twitter
-- Profile Editting
-- and any other improvements
+Authenticate using :
+- Twiiter
+- Instagram
 
 ## Contributors
 This application was made and is maintained by Lebogang Bantsijang
